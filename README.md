@@ -26,6 +26,7 @@ each other as well
 ## User Stories
 - As a user, I want to be able to add products I am reselling to my profile
 - As a user, I want to be able to view available products on the platform
+- As a user, I want to be able to view products specific to my liking
 - As a user, I want to be able to view another person's profile and their products
 - As a user, I want to be able to buy an item or get connected to the seller of this item
-- As a user, I want to be able to view products specific to my liking
+- As a user, I want to be able to set the status of the products I am reselling
