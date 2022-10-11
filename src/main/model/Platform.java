@@ -3,27 +3,28 @@ package model;
 import java.util.ArrayList;
 
 // Represents a platform where users can browse products
+// platform <-> users
 public class Platform {
-    private ArrayList<Product> platformProducts;
+    private ArrayList<User> platformUsers;
 
     // Constructor
     // REQUIRES
     // MODIFIES
     // EFFECTS
     public Platform() {
-        platformProducts = new ArrayList<Product>();
+        platformUsers = new ArrayList<User>();
     }
 
     // Add products to platform
     //
     // MODIFIES: this
     //
-    public void addProduct(Product p) {
-        platformProducts.add(p);
+    public void addProduct(User u) {
+        platformUsers.add(u);
     }
 
-    // USER STORY #2: view available products on platform
-    public void availableProducts() {
+    // USER STORY #2: view users on platform
+    public void usersOnPlatform() {
         // stub
         // Question: how should I implement this
     }

@@ -25,7 +25,7 @@ each other as well
 
 ## User Stories
 - As a user, I want to be able to add products I'm reselling to my profile
-- As a user, I want to be able to view available products on the platform
+- As a user, I want to be able to view sellers on the platform
 - As a user, I want to be able to remove products I'm no longer selling from my profile
 - As a user, I want to be able to set the status of the products I am reselling
 - As a user, I want to be able to view products specific to my liking (later)
