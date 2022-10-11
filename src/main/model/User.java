@@ -1,6 +1,5 @@
 package model;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 // Represents a user on this platform with a username and a list of products they sell
@@ -25,12 +24,12 @@ public class User {
         return products;
     }
 
-    // USER STORY #1: add product reselling to profile
+    // USER STORY #1: add products the user is reselling to profile
     // REQUIRES:
     // MODIFIES: this
     // EFFECTS:
-    public void addProduct() {
-        // stub
+    public void addProduct(Product p) {
+        products.add(p);
     }
 
 
