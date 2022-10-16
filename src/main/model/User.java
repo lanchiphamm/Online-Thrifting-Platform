@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 // Represents a user on this platform with a username and a list of products they sell
 public class User {
-    private String name;                    // Username of profile
+    private final String name;                    // Username of profile
     private ArrayList<Product> products;    // User's list of products
     private ShoppingCart cart;              // keep track of purchases
 
@@ -12,8 +12,9 @@ public class User {
     // EFFECTS: name on account is set to accountName; an empty list of Products
     //          is initialised
     public User(String accountName) {
-        this.name = accountName;
-        this.products = new ArrayList<Product>();
+        name = accountName;
+        products = new ArrayList<Product>();
+        cart = new ShoppingCart();
     }
 
     // Getters and Setters
@@ -31,6 +32,7 @@ public class User {
     // EFFECTS:
     public void addProduct(Product p) {
         products.add(p);
+        p.setUser(this);
     }
 
     // USER STORY #3: set status of product

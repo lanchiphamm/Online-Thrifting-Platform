@@ -15,17 +15,18 @@ public class Platform {
         platformUsers = new ArrayList<User>();
     }
 
-    // Add products to platform
+    // Add users to platform
     //
     // MODIFIES: this
     //
-    public void addProduct(User u) {
+    public void signUpUser(User u) {
         platformUsers.add(u);
     }
 
     // USER STORY #2: view users on platform
-    public void usersOnPlatform() {
+    public ArrayList<User> usersOnPlatform() {
         // stub
         // Question: how should I implement this
+        return platformUsers;
     }
 }

@@ -1,5 +1,5 @@
 package model;
 
 public enum ProductType {
-    SHIRT, JACKET, PANTS, SHOES, ACCESSORIES
+    SHIRT, OUTERWEAR, PANTS, SHOES, ACCESSORIES
 }
