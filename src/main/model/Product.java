@@ -1,15 +1,16 @@
 package model;
 
-// Represents a product and its owner, type, price, status and any additional information
+// Represents a product and its owner, type, price, and any additional information
 public class Product {
-    private User user;          // Seller of this product
-    private ProductType type;   // type of clothing - 1 of 5: shirt/jacket/pant/shoes/accessories
-    private int price;          // price of product
-    private boolean status = true; // status of product - sold (false) or available (true)
-    private String info;        // extra information inputted by user
+    private User user;              // seller of this product
+    private ProductType type;       // type of clothing - ENUM
+    private int price;              // price of product
+    private String info;            // extra information inputted by user
 
     // Constructor
     // REQUIRES: price >= 0
+    // MODIFIES: this
+    // EFFECTS: construct a product with type, price and any additional information
     public Product(ProductType type, int price, String info) {
         this.type = type;
         this.price = price;
@@ -17,12 +18,16 @@ public class Product {
     }
 
     // Getters and Setters
-    public User getUser() {
-        return user;
-    }
 
+    // REQUIRES: u != null
+    // MODIFIES: this
+    // EFFECTS: set the user of this product to u
     public void setUser(User u) {
         this.user = u;
+    }
+
+    public User getUser() {
+        return user;
     }
 
     public ProductType getType() {
@@ -31,14 +36,6 @@ public class Product {
 
     public int getPrice() {
         return price;
-    }
-
-    public boolean getStatus() {
-        return status;
-    }
-
-    public void setStatus(boolean s) {
-        status = s;
     }
 
     public String getInfo() {
