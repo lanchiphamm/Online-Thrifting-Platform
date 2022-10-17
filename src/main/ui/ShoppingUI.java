@@ -130,7 +130,7 @@ public class ShoppingUI {
 
     // print list of users and
     private void printUsersOnPlatform() {
-        ArrayList<User> listUser = platform.usersOnPlatform();
+        ArrayList<User> listUser = platform.getUsersOnPlatform();
         for (int i = 1; i <= listUser.size(); i++) {
             User user = listUser.get(i - 1);
             ArrayList<Product> listProducts = user.getProducts();
@@ -170,7 +170,7 @@ public class ShoppingUI {
             u = indexes.get(0);
             p = indexes.get(1);
             if (1 <= u && u <= platform.numOfUsersOnPlatform() - 1) {
-                User tmp = platform.usersOnPlatform().get(u - 1);
+                User tmp = platform.getUsersOnPlatform().get(u - 1);
                 if (1 <= p && p <= tmp.getProducts().size()) {
                     break;
                 }
@@ -178,7 +178,7 @@ public class ShoppingUI {
             System.out.println("Item not found. Please re-enter index: ");
             index = input.nextLine();
         }
-        User seller = platform.usersOnPlatform().get(u - 1);
+        User seller = platform.getUsersOnPlatform().get(u - 1);
         Product productAdded = seller.getProducts().get(p - 1);
         user.addToCart(productAdded);
         System.out.println(printProduct(productAdded) + " is added to your cart");

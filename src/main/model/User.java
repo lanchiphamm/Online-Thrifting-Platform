@@ -17,13 +17,17 @@ public class User {
         cart = new ArrayList<>();
     }
 
-    // Getters and Setters
+    // getter
     public String getName() {
         return name;
     }
 
     public ArrayList<Product> getProducts() {
         return products;
+    }
+
+    public ArrayList<Product> getCart() {
+        return cart;
     }
 
     // USER STORY #1: add products the user is reselling to profile
@@ -43,9 +47,6 @@ public class User {
         products.remove(p);
     }
 
-    public ArrayList<Product> getCart() {
-        return cart;
-    }
 
     // USER STORY #4: add products the user wants to purchase to their cart
     // REQUIRES: p != null

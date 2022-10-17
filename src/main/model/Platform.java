@@ -2,12 +2,11 @@ package model;
 
 import java.util.ArrayList;
 
-// Represents a platform where users can browse products
-// platform <-> users
+// Represents a platform with Users on it
 public class Platform {
     private ArrayList<User> platformUsers;
 
-    // Constructor
+    // CONSTRUCTOR
     // MODIFIES: this
     // EFFECTS: initialise an empty list of Users
     public Platform() {
@@ -22,12 +21,14 @@ public class Platform {
         platformUsers.add(u);
     }
 
+    // getter
     // USER STORY #2: view users on platform
     // EFFECTS: return the list platformUsers
-    public ArrayList<User> usersOnPlatform() {
+    public ArrayList<User> getUsersOnPlatform() {
         return platformUsers;
     }
 
+    // getter
     // EFFECTS: return the number of Users on this platform
     public int numOfUsersOnPlatform() {
         return platformUsers.size();
