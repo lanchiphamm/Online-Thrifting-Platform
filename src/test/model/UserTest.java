@@ -50,10 +50,15 @@ class UserTest {
     }
 
     @Test
-    void testRemoveItem() {
+    void testRemoveItemFail() {
+        assertFalse(testUser.removeItem(p2));
+    }
+
+    @Test
+    void testRemoveItemSuccess() {
         testUser.addProduct(p1);
         testUser.addProduct(p2);
-        testUser.removeItem(p1);
+        assertTrue(testUser.removeItem(p1));
         assertEquals(1, testUser.getProducts().size());
         assertFalse(testUser.getProducts().contains(p1));
         assertTrue(testUser.getProducts().contains(p2));
@@ -63,11 +68,12 @@ class UserTest {
     void testRemoveManyItem() {
         testUser.addProduct(p1);
         testUser.addProduct(p2);
-        testUser.removeItem(p1);
-        testUser.removeItem(p2);
+        assertTrue(testUser.removeItem(p1));
+        assertTrue(testUser.removeItem(p2));
         assertEquals(0, testUser.getProducts().size());
         assertFalse(testUser.getProducts().contains(p1));
         assertFalse(testUser.getProducts().contains(p2));
+        assertFalse(testUser.removeItem(p1));
     }
 
     @Test
@@ -89,10 +95,15 @@ class UserTest {
     }
 
     @Test
+    void testRemoveFromEmptyCart() {
+        assertFalse(testUser.removeFromCart(p1));
+    }
+
+    @Test
     void testRemoveFromCart() {
         testUser.addToCart(p1);
         testUser.addToCart(p2);
-        testUser.removeFromCart(p1);
+        assertTrue(testUser.removeFromCart(p1));
         assertEquals(1, testUser.getCart().size());
         assertFalse(testUser.getCart().contains(p1));
         assertTrue(testUser.getCart().contains(p2));
@@ -102,8 +113,9 @@ class UserTest {
     void testRemoveManyFromCart() {
         testUser.addToCart(p1);
         testUser.addToCart(p2);
-        testUser.removeFromCart(p1);
-        testUser.removeFromCart(p2);
+        assertTrue(testUser.removeFromCart(p1));
+        assertTrue(testUser.removeFromCart(p2));
+        assertFalse(testUser.removeFromCart(p1));
         assertEquals(0, testUser.getCart().size());
         assertFalse(testUser.getCart().contains(p1));
         assertFalse(testUser.getCart().contains(p2));

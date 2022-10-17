@@ -40,11 +40,16 @@ public class User {
     }
 
     // USER STORY #3: remove product from profile
-    // REQUIRES: p != null && p in products
+    // REQUIRES: p != null
     // MODIFIES: this
-    // EFFECTS: remove p from products
-    public void removeItem(Product p) {
-        products.remove(p);
+    // EFFECTS: if p is in products, then remove p from products and return true;
+    //          otherwise return false
+    public boolean removeItem(Product p) {
+        if (products.contains(p)) {
+            products.remove(p);
+            return true;
+        }
+        return false;
     }
 
 
@@ -56,10 +61,14 @@ public class User {
         cart.add(p);
     }
 
-    // REQUIRES: p != null && p in cart
+    // REQUIRES: p != null
     // MODIFIES: this
-    // EFFECTS: remove p from cart
-    public void removeFromCart(Product p) {
-        cart.remove(p);
+    // EFFECTS:  if p is in cart, then remove p and return true; otherwise return false
+    public boolean removeFromCart(Product p) {
+        if (cart.contains(p)) {
+            cart.remove(p);
+            return true;
+        }
+        return false;
     }
 }
