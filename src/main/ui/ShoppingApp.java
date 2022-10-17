@@ -27,6 +27,7 @@ public class ShoppingApp {
         System.out.println("Welcome to OnlineThrift!\n");
 
         shoppingUI.runUI();
+        shoppingUI.quitProgram();
 
         System.out.println("Thank you for shopping with OnlineThrift!");
     }

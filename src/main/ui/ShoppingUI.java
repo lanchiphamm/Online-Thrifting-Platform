@@ -54,7 +54,7 @@ public class ShoppingUI {
         }
     }
 
-    // EFFECTS: handle navigation between different ui
+    // EFFECTS: handle navigation commands: back, quit
     private void handleNavigateInput(String str) {
         if (str.length() > 0) {
             switch (str) {
@@ -72,7 +72,7 @@ public class ShoppingUI {
         }
     }
 
-    // EFFECTS: print main menu options
+    // EFFECTS: handle main menu commands
     private void handleMainMenuInput(String str) {
         if (str.length() > 0) {
             switch (str) {
@@ -92,6 +92,7 @@ public class ShoppingUI {
         }
     }
 
+    // EFFECTS: print main menu
     private void printMainMenu() {
         if (user == null) {
             System.out.println("You must sign up first to shop.");
@@ -104,6 +105,8 @@ public class ShoppingUI {
         quit();
     }
 
+    // MODIFIES: this
+    // EFFECTS: sign up user to the platform
     public void handleSignUp() {
         System.out.println("To create an OnlineThrift account, "
                 + "please fill in the following information.\n"
@@ -116,7 +119,7 @@ public class ShoppingUI {
         printMainMenu();
     }
 
-    // Start Buying and can view cart
+    // EFFECTS: print menu when using is browsing
     public void printBuyMenu() {
         caseUI = 2;
         System.out.println("Here is a list of current Users and their Products on our platform:");
@@ -128,7 +131,7 @@ public class ShoppingUI {
     }
 
 
-    // print list of users and
+    // EFFECTS: print list of users and their products
     private void printUsersOnPlatform() {
         ArrayList<User> listUser = platform.getUsersOnPlatform();
         for (int i = 1; i <= listUser.size(); i++) {
@@ -144,6 +147,7 @@ public class ShoppingUI {
         }
     }
 
+    // EFFECTS: handle user's inputs when they want to buy
     private void handleBuyInput(String str) {
         if (str.length() > 0) {
             switch (str) {
@@ -160,6 +164,8 @@ public class ShoppingUI {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: add product of user's choice to their own cart
     private void handleAddProducts() {
         System.out.println("Please enter the index (e.g. '1.1') of the product you would like to buy: ");
         String index = input.nextLine();
@@ -185,6 +191,8 @@ public class ShoppingUI {
         printBuyMenu();
     }
 
+    // EFFECTS: check for valid input when choosing products to add to cart;
+    //          return list of integer if input is valid
     private ArrayList<Integer> validInputForProduct(String s) {
         ArrayList<Integer> indexes = new ArrayList<>(2);
         boolean valid = Pattern.matches("[0-9]+\\.[0-9]+", s);
@@ -202,6 +210,7 @@ public class ShoppingUI {
         return indexes;
     }
 
+    // EFFECTS: print items in user's cart
     private void handleViewCart() {
         System.out.println("Your shopping cart (" + user.getCart().size() + " items):");
         for (int i = 1; i <= user.getCart().size(); i++) {
@@ -211,8 +220,7 @@ public class ShoppingUI {
     }
 
 
-
-    // start selling and can view their own profile
+    // EFFECTS: print menu when user choose to start selling
     public void printSellMenu() {
         caseUI = 3;
         System.out.println("Let's begin your business career!");
@@ -221,9 +229,7 @@ public class ShoppingUI {
                 + "Enter '" + REMOVE_COMMAND + "' to remove products you no longer sell");
     }
 
-
-
-
+    // EFFECTS: handle user's inputs when selling
     private void handleSellInput(String str) {
         if (str.length() > 0) {
             switch (str) {
@@ -243,7 +249,8 @@ public class ShoppingUI {
         }
     }
 
-
+    // MODIFIES: this
+    // EFFECTS: add product with specifications from user to user's profile
     private void handleAddProductstoProfile() {
         System.out.println("Please specify the following details for your product:\n"
                 + "1. Enter one of the following Product Types:\n"
@@ -266,6 +273,7 @@ public class ShoppingUI {
         printSellMenu();
     }
 
+    // EFFECTS: print user's profile - username and products they sell
     private void handleViewProfile() {
         System.out.println("User: " + user.getName());
         ArrayList<Product> listProducts = user.getProducts();
@@ -298,22 +306,30 @@ public class ShoppingUI {
         }
     }
 
+    // EFFECTS: stops receiving user input
+    public void quitProgram() {
+        input.close();
+    }
 
-    // extra functions
+    // Extra functions
+    // EFFECTS: print description of Product p
     private String printProduct(Product p) {
         return p.getType() + ": $" + p.getPrice() + " - " + p.getInfo();
     }
 
+    // EFFECTS: remove whitespace around s and make inputs uniformed
     private String appropriateInput(String s) {
         s = s.toLowerCase();
         s = s.trim();
         return s;
     }
 
+    // EFFECTS: print instructions to return to main Menu
     private void returnToMainMenu() {
         System.out.println("To go back to the main Menu, enter '" + BACK_COMMAND + "'.");
     }
 
+    // EFFECTS: print instructions to quit program
     private void quit() {
         System.out.println("To quit at any time, enter '" + QUIT_COMMAND + "'.");
     }
