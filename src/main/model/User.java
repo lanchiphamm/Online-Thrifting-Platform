@@ -4,9 +4,9 @@ import java.util.ArrayList;
 
 // Represents a user on this platform with a username and a list of products they sell
 public class User {
-    private final String name;                    // Username of profile
-    private ArrayList<Product> products;    // User's list of products
-    private ArrayList<Product> cart;              // keep track of purchases
+    private final String name;                  // Username of profile
+    private ArrayList<Product> products;        // User's list of products
+    private ArrayList<Product> cart;            // keep track of purchases
 
     // REQUIRES: accountName is not an empty string
     // EFFECTS: name on account is set to accountName; an empty list of Products
@@ -35,15 +35,7 @@ public class User {
         p.setUser(this);
     }
 
-    // USER STORY #3: set status of product
-    //
-    //
-    //
-    public void setStatus(Product p) {
-        //
-    }
-
-    // USER STORY #4: remove product from profile
+    // USER STORY #3: remove product from profile
     // REQUIRES: p != null && p in products
     // MODIFIES: this
     // EFFECTS: remove p from products
@@ -55,10 +47,17 @@ public class User {
         return cart;
     }
 
+    // USER STORY #4: add products the user wants to purchase to their cart
+    // REQUIRES: p != null
+    // MODIFIES: this
+    // EFFECTS: p is added to cart
     public void addToCart(Product p) {
         cart.add(p);
     }
 
+    // REQUIRES: p != null && p in cart
+    // MODIFIES: this
+    // EFFECTS: remove p from cart
     public void removeFromCart(Product p) {
         cart.remove(p);
     }

@@ -17,8 +17,6 @@ public class Product {
         this.info = info;
     }
 
-    // Getters and Setters
-
     // REQUIRES: u != null
     // MODIFIES: this
     // EFFECTS: set the user of this product to u
