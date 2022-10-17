@@ -32,10 +32,13 @@ public class ShoppingApp {
         System.out.println("Thank you for shopping with OnlineThrift!");
     }
 
+    // getter
     public Platform getPlatform() {
         return platform;
     }
 
+    // MODIFIES: this
+    // EFFECTS: load some fixed users for the platform
     private void loadUsers() {
         u1 = new User("andrew_01");
         u2 = new User("vintage_thrifter");
@@ -44,6 +47,8 @@ public class ShoppingApp {
         platform.signUpUser(u2);
     }
 
+    // MODIFIES: this
+    // EFFECTS: load some fixed products for the users
     private void loadUsersProducts() {
         Product p1 = new Product(SHOES, 100, "Nike AF1");
         Product p2 = new Product(SHIRT, 50, "Nike Sportswear");

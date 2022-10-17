@@ -8,6 +8,14 @@ import model.Product;
 import model.ProductType;
 import model.User;
 
+/*
+Instructions: Always have to sign up first to access the Main UI
+Main UI Structure:
+- Main Menu: Choose between browse products or sell products
+'browse' -> Buy Menu: a list of Users-Products and options to add product to cart or view cart
+'sell' -> Sell Menu: options to add products you sell, view profile, or remove product you no longer sell
+ */
+
 public class ShoppingUI {
 
     private static final String REGISTER_COMMAND = "sign up";
@@ -47,32 +55,14 @@ public class ShoppingUI {
                     handleMainMenuInput(str);
                 } else if (caseUI == 2) {
                     handleBuyInput(str);
-                } else {
+                } else if (caseUI == 3) {
                     handleSellInput(str);
                 }
             }
         }
     }
 
-    // EFFECTS: handle navigation commands: back, quit
-    private void handleNavigateInput(String str) {
-        if (str.length() > 0) {
-            switch (str) {
-                case BACK_COMMAND:
-                    caseUI = 1;
-                    printMainMenu();
-                    break;
-                case QUIT_COMMAND:
-                    runProgram = false;
-                    break;
-                default:
-                    System.out.println("Sorry, I didn't understand that command :( Please try again.");
-                    break;
-            }
-        }
-    }
-
-    // EFFECTS: handle main menu commands
+    // EFFECTS: handle main menu commands - caseUI == 1
     private void handleMainMenuInput(String str) {
         if (str.length() > 0) {
             switch (str) {
@@ -83,6 +73,7 @@ public class ShoppingUI {
                     printBuyMenu();
                     break;
                 case SELL_COMMAND:
+                    System.out.println("Let's begin your business career!\n");
                     printSellMenu();
                     break;
                 default:
@@ -90,19 +81,6 @@ public class ShoppingUI {
                     break;
             }
         }
-    }
-
-    // EFFECTS: print main menu
-    private void printMainMenu() {
-        if (user == null) {
-            System.out.println("You must sign up first to shop.");
-            System.out.println("Enter '" + REGISTER_COMMAND + "' to sign up as an user.\n");
-        } else {
-            System.out.println("Welcome " + user.getName() + "! \nLet's explore OnlineThrift:");
-            System.out.println("Enter '" + BROWSE_COMMAND + "' to start thrifting.");
-            System.out.println("Enter '" + SELL_COMMAND + "' to start selling.\n");
-        }
-        quit();
     }
 
     // MODIFIES: this
@@ -119,7 +97,20 @@ public class ShoppingUI {
         printMainMenu();
     }
 
-    // EFFECTS: print menu when using is browsing
+    // EFFECTS: print main menu
+    private void printMainMenu() {
+        if (user == null) {
+            System.out.println("You must sign up first to shop.");
+            System.out.println("Enter '" + REGISTER_COMMAND + "' to sign up as an user.\n");
+        } else {
+            System.out.println("Welcome " + user.getName() + "! \nLet's explore OnlineThrift:");
+            System.out.println("Enter '" + BROWSE_COMMAND + "' to start thrifting.");
+            System.out.println("Enter '" + SELL_COMMAND + "' to start selling.\n");
+        }
+        quit();
+    }
+
+    // EFFECTS: print buy menu for user to browse for products
     public void printBuyMenu() {
         caseUI = 2;
         System.out.println("Here is a list of current Users and their Products on our platform:");
@@ -130,15 +121,19 @@ public class ShoppingUI {
         quit();
     }
 
-
-    // EFFECTS: print list of users and their products
+    // User Story #2
+    // EFFECTS: print list of users selling products on the platform and their products
     private void printUsersOnPlatform() {
         ArrayList<User> listUser = platform.getUsersOnPlatform();
         for (int i = 1; i <= listUser.size(); i++) {
             User user = listUser.get(i - 1);
             ArrayList<Product> listProducts = user.getProducts();
             if (listProducts.size() > 0) {
-                System.out.println("User: " + user.getName());
+                if (user == this.user) {
+                    System.out.println("User: " + user.getName() + " - Yourself");
+                } else {
+                    System.out.println("User: " + user.getName());
+                }
                 for (int j = 1; j <= listProducts.size(); j++) {
                     Product p = listProducts.get(j - 1);
                     System.out.println(i + "." + j + " " + printProduct(p));
@@ -147,7 +142,7 @@ public class ShoppingUI {
         }
     }
 
-    // EFFECTS: handle user's inputs when they want to buy
+    // EFFECTS: handle user's inputs when they want to buy - caseUI == 2
     private void handleBuyInput(String str) {
         if (str.length() > 0) {
             switch (str) {
@@ -164,6 +159,7 @@ public class ShoppingUI {
         }
     }
 
+    // User Story #4
     // MODIFIES: this
     // EFFECTS: add product of user's choice to their own cart
     private void handleAddProducts() {
@@ -191,56 +187,38 @@ public class ShoppingUI {
         printBuyMenu();
     }
 
-    // EFFECTS: check for valid input when choosing products to add to cart;
-    //          return list of integer if input is valid
-    private ArrayList<Integer> validInputForProduct(String s) {
-        ArrayList<Integer> indexes = new ArrayList<>(2);
-        boolean valid = Pattern.matches("[0-9]+\\.[0-9]+", s);
-        while (!valid) {
-            System.out.println("Item not found. Please re-enter index: ");
-            s = input.nextLine();
-            valid = Pattern.matches("[0-9]+\\.[0-9]+", s);
-        }
-
-        String[] tmp = s.split("[.]", 0);
-        for (String str : tmp) {
-            indexes.add(Integer.parseInt(str));
-        }
-
-        return indexes;
-    }
-
     // EFFECTS: print items in user's cart
     private void handleViewCart() {
         System.out.println("Your shopping cart (" + user.getCart().size() + " items):");
         for (int i = 1; i <= user.getCart().size(); i++) {
-            Product p = user.getCart().get(i);
+            Product p = user.getCart().get(i - 1);
             System.out.println(i + ". " + printProduct(p));
         }
     }
 
-
-    // EFFECTS: print menu when user choose to start selling
+    // EFFECTS: print sell menu for user to start selling
     public void printSellMenu() {
         caseUI = 3;
-        System.out.println("Let's begin your business career!");
-        System.out.println("Enter '" + ADD_TO_PROFILE_COMMAND + "' to add products you want to sell\n"
-                + "Enter '" + PROFILE_COMMAND + "' to view your profile as a seller\n"
-                + "Enter '" + REMOVE_COMMAND + "' to remove products you no longer sell");
+        System.out.println("Enter '" + ADD_TO_PROFILE_COMMAND + "' to add products you want to sell.\n"
+                + "Enter '" + PROFILE_COMMAND + "' to view your profile as a seller.\n"
+                + "Enter '" + REMOVE_COMMAND + "' to remove products you no longer sell.");
+
+        returnToMainMenu();
+        quit();
     }
 
-    // EFFECTS: handle user's inputs when selling
+    // EFFECTS: handle user's inputs when selling - caseUI == 3
     private void handleSellInput(String str) {
         if (str.length() > 0) {
             switch (str) {
                 case ADD_TO_PROFILE_COMMAND:
-                    handleAddProductstoProfile();
+                    handleAddProductsToProfile();
                     break;
                 case PROFILE_COMMAND:
                     handleViewProfile();
                     break;
                 case REMOVE_COMMAND:
-                    handleRemoveProductfromProfile();
+                    handleRemoveProductFromProfile();
                     break;
                 default:
                     handleNavigateInput(str);
@@ -249,9 +227,10 @@ public class ShoppingUI {
         }
     }
 
+    // User Story #1
     // MODIFIES: this
     // EFFECTS: add product with specifications from user to user's profile
-    private void handleAddProductstoProfile() {
+    private void handleAddProductsToProfile() {
         System.out.println("Please specify the following details for your product:\n"
                 + "1. Enter one of the following Product Types:\n"
                 + "shirt\n"
@@ -269,7 +248,7 @@ public class ShoppingUI {
 
         Product p = new Product(pt, price, info);
         user.addProduct(p);
-        System.out.println(printProduct(p) + " has been added to your profile.");
+        System.out.println(printProduct(p) + " has been added to your profile.\n");
         printSellMenu();
     }
 
@@ -278,50 +257,54 @@ public class ShoppingUI {
         System.out.println("User: " + user.getName());
         ArrayList<Product> listProducts = user.getProducts();
         if (listProducts.isEmpty()) {
-            System.out.println("Your profile is empty!");
+            System.out.println("Your profile is empty!\n");
         } else {
             for (int i = 1; i <= listProducts.size(); i++) {
                 Product p = listProducts.get(i - 1);
                 System.out.println(i + ". " + printProduct(p));
             }
+            System.out.println();
         }
+        printSellMenu();
     }
 
-    private void handleRemoveProductfromProfile() {
+    // User Story #3
+    // MODIFIES: this
+    // EFFECTS: handle user's input and remove user's choice of product from their profile
+    private void handleRemoveProductFromProfile() {
         if (user.getProducts().isEmpty()) {
-            System.out.println("You currently have no products.");
+            System.out.println("You currently have no products.\n");
         } else {
             System.out.println("Specify the index for the product you are no longer selling: ");
             int index = input.nextInt();
-            while (true) {
-                if (index > 0 && index <= user.getProducts().size()) {
-                    Product p = user.getProducts().get(index - 1);
-                    user.removeItem(p);
-                    System.out.println("Item removed.");
-                    break;
-                }
+            Product p = user.getProducts().get(index - 1);
+            while (!user.removeItem(p)) {
                 System.out.println("Item not found. Please re-enter index: ");
                 index = input.nextInt();
+                p = user.getProducts().get(index - 1);
+            }
+            System.out.println("Item removed.\n");
+        }
+
+        printSellMenu();
+    }
+
+    // EFFECTS: handle navigation commands: back, quit
+    private void handleNavigateInput(String str) {
+        if (str.length() > 0) {
+            switch (str) {
+                case BACK_COMMAND:
+                    caseUI = 1;
+                    printMainMenu();
+                    break;
+                case QUIT_COMMAND:
+                    runProgram = false;
+                    break;
+                default:
+                    System.out.println("Sorry, I didn't understand that command :( Please try again.");
+                    break;
             }
         }
-    }
-
-    // EFFECTS: stops receiving user input
-    public void quitProgram() {
-        input.close();
-    }
-
-    // Extra functions
-    // EFFECTS: print description of Product p
-    private String printProduct(Product p) {
-        return p.getType() + ": $" + p.getPrice() + " - " + p.getInfo();
-    }
-
-    // EFFECTS: remove whitespace around s and make inputs uniformed
-    private String appropriateInput(String s) {
-        s = s.toLowerCase();
-        s = s.trim();
-        return s;
     }
 
     // EFFECTS: print instructions to return to main Menu
@@ -332,5 +315,41 @@ public class ShoppingUI {
     // EFFECTS: print instructions to quit program
     private void quit() {
         System.out.println("To quit at any time, enter '" + QUIT_COMMAND + "'.");
+    }
+
+    // EFFECTS: stops receiving user input
+    public void quitProgram() {
+        input.close();
+    }
+
+    // EFFECTS: check for valid input when choosing products to add to cart;
+    //          return list input sliced as integers if input is valid
+    private ArrayList<Integer> validInputForProduct(String s) {
+        ArrayList<Integer> indexes = new ArrayList<>(2);
+        boolean valid = Pattern.matches("[0-9]+\\.[0-9]+", s);
+        while (!valid) {
+            System.out.println("Item not found. Please re-enter index: ");
+            s = input.nextLine();
+            valid = Pattern.matches("[0-9]+\\.[0-9]+", s);
+        }
+
+        String[] tmp = s.split("[.]", 0);
+        for (String str : tmp) {
+            indexes.add(Integer.parseInt(str));
+        }
+
+        return indexes;
+    }
+
+    // EFFECTS: print description of Product p
+    private String printProduct(Product p) {
+        return p.getType() + ": $" + p.getPrice() + " - " + p.getInfo();
+    }
+
+    // EFFECTS: remove whitespace around s and make inputs uniformed
+    private String appropriateInput(String s) {
+        s = s.toLowerCase();
+        s = s.trim();
+        return s;
     }
 }
