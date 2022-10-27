@@ -6,6 +6,7 @@ import static model.ProductType.PANTS;
 import static model.ProductType.SHIRT;
 import static model.ProductType.SHOES;
 
+import java.io.FileNotFoundException;
 import model.Platform;
 import model.Product;
 import model.User;
@@ -23,13 +24,16 @@ public class ShoppingApp {
 
     public static void main(String[] args) {
         ShoppingApp shoppingApp = new ShoppingApp();
-        ShoppingUI shoppingUI = new ShoppingUI(shoppingApp.getPlatform());
-        System.out.println("Welcome to OnlineThrift!\n");
+        try {
+            ShoppingUI shoppingUI = new ShoppingUI(shoppingApp.getPlatform());
+            System.out.println("Welcome to OnlineThrift!\n");
 
-        shoppingUI.runUI();
-        shoppingUI.quitProgram();
-
-        System.out.println("Thank you for shopping with OnlineThrift!");
+            shoppingUI.runUI();
+            shoppingUI.quitProgram();
+            System.out.println("Thank you for shopping with OnlineThrift!");
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to run application: file not found");
+        }
     }
 
     // getter

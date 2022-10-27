@@ -1,9 +1,12 @@
 package model;
 
 import java.util.ArrayList;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
 
 // Represents a platform with Users on it
-public class Platform {
+public class Platform implements Writable {
     private ArrayList<User> platformUsers;
 
     // CONSTRUCTOR
@@ -34,4 +37,20 @@ public class Platform {
         return platformUsers.size();
     }
 
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("users", usersToJson());
+        return json;
+    }
+
+    // EFFECTS: returns users on this platform as a JSON array
+    private JSONArray usersToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (User u : platformUsers) {
+            jsonArray.put(u.toJson());
+        }
+        return jsonArray;
+    }
 }

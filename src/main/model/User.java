@@ -1,9 +1,12 @@
 package model;
 
 import java.util.ArrayList;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
 
 // Represents a user on this platform with a username and a list of products they sell
-public class User {
+public class User implements Writable {
     private final String name;                  // Username of profile
     private ArrayList<Product> products;        // User's list of products
     private ArrayList<Product> cart;            // keep track of purchases
@@ -70,5 +73,34 @@ public class User {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("name", name);
+        json.put("products", productsToJson());
+        json.put("cart", cartToJson());
+        return json;
+    }
+
+    // EFFECTS: returns products of this user as a JSON array
+    private JSONArray productsToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Product p : products) {
+            jsonArray.put(p.toJson());
+        }
+        return jsonArray;
+    }
+
+    // EFFECTS: returns products of this user as a JSON array
+    private JSONArray cartToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Product c : cart) {
+            jsonArray.put(c.toJson());
+        }
+        return jsonArray;
     }
 }

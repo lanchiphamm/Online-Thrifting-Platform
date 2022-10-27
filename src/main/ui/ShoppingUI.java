@@ -1,12 +1,18 @@
 package ui;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 import model.Platform;
 import model.Product;
 import model.ProductType;
 import model.User;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 
 /*
 Instructions: Always have to sign up first to access the Main UI
@@ -29,23 +35,31 @@ public class ShoppingUI {
     private static final String BACK_COMMAND = "back";
     private static final String QUIT_COMMAND = "quit";
 
-
+    private static final String JSON_STORE = "./data/platform.json";
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
     private Scanner input;
     private boolean runProgram;
     private int caseUI = 1;  // 1 for main, 2 for buy, 3 for sell
     private User user;
     private Platform platform;
 
-    public ShoppingUI(Platform platform) {
+    public ShoppingUI(Platform platform) throws FileNotFoundException {
         input = new Scanner(System.in);
         runProgram = true;
         this.platform = platform;
+        this.jsonWriter = new JsonWriter(JSON_STORE);
+        this.jsonReader = new JsonReader(JSON_STORE);
     }
 
     // EFFECTS: parses user input until they quit
     public void runUI() {
         printMainMenu();
         String str;
+        File sys = new File(JSON_STORE);
+        if (sys.exists()) {
+            loadPlatform();
+        }
 
         while (runProgram) {
             if (input.hasNext()) {
@@ -124,7 +138,7 @@ public class ShoppingUI {
     // User Story #2
     // EFFECTS: print list of users selling products on the platform and their products
     private void printUsersOnPlatform() {
-        ArrayList<User> listUser = platform.getUsersOnPlatform();
+        List<User> listUser = platform.getUsersOnPlatform();
         for (int i = 1; i <= listUser.size(); i++) {
             User user = listUser.get(i - 1);
             ArrayList<Product> listProducts = user.getProducts();
@@ -298,6 +312,7 @@ public class ShoppingUI {
                     printMainMenu();
                     break;
                 case QUIT_COMMAND:
+                    savePlatform();
                     runProgram = false;
                     break;
                 default:
@@ -320,6 +335,29 @@ public class ShoppingUI {
     // EFFECTS: stops receiving user input
     public void quitProgram() {
         input.close();
+    }
+
+    // EFFECTS: saves the platform to file
+    private void savePlatform() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(platform);
+            jsonWriter.close();
+            System.out.println("Saved information");
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: loads platform from file
+    private void loadPlatform() {
+        try {
+            platform = jsonReader.read();
+            System.out.println("Loaded info from " + JSON_STORE);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
+        }
     }
 
     // EFFECTS: check for valid input when choosing products to add to cart;

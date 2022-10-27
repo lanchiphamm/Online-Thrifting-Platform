@@ -1,7 +1,10 @@
 package model;
 
+import org.json.JSONObject;
+import persistence.Writable;
+
 // Represents a product and its owner, type, price, and any additional information
-public class Product {
+public class Product implements Writable {
     private User user;              // seller of this product
     private ProductType type;       // type of clothing - ENUM
     private int price;              // price of product
@@ -38,5 +41,14 @@ public class Product {
 
     public String getInfo() {
         return info;
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("type", type);
+        json.put("price", price);
+        json.put("info", info);
+        return json;
     }
 }
