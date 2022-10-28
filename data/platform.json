@@ -1,0 +1,51 @@
+{"users": [
+    {
+        "password": "12345678",
+        "name": "andrew_01",
+        "cart": [],
+        "products": [
+            {
+                "price": 100,
+                "type": "SHOES",
+                "info": "Nike AF1"
+            },
+            {
+                "price": 30,
+                "type": "ACCESSORIES",
+                "info": "Carhartt Beanie"
+            }
+        ]
+    },
+    {
+        "password": "hahahaha",
+        "name": "vintage_thrifter",
+        "cart": [],
+        "products": [
+            {
+                "price": 60,
+                "type": "OUTERWEAR",
+                "info": "Black hoodie"
+            },
+            {
+                "price": 50,
+                "type": "SHIRT",
+                "info": "Nike Sportswear"
+            },
+            {
+                "price": 70,
+                "type": "PANTS",
+                "info": "ZARA Work Jeans"
+            }
+        ]
+    },
+    {
+        "password": "18012002",
+        "name": "chichi",
+        "cart": [{
+            "price": 30,
+            "type": "ACCESSORIES",
+            "info": "Carhartt Beanie"
+        }],
+        "products": []
+    }
+]}

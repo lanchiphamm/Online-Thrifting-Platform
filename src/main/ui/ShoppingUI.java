@@ -73,6 +73,25 @@ public class ShoppingUI {
         }
     }
 
+    // EFFECTS: print main menu
+    private void printMainMenu() {
+        File sys = new File(JSON_STORE);
+        if (!sys.exists() && user == null) {
+            System.out.println("You must sign up first to shop.");
+            System.out.println("Enter '" + REGISTER_COMMAND + "' to sign up as an user.\n");
+        } else if (user == null) {
+            System.out.println("You must log in or sign up first to shop.");
+            System.out.println("Enter '" + REGISTER_COMMAND + "' to sign up as a new user.");
+            System.out.println("Enter '" + LOGIN_COMMAND + "' if you've already "
+                    + "had an account with us.\n");
+        } else {
+            System.out.println("Welcome " + user.getName() + "! \nLet's explore OnlineThrift:");
+            System.out.println("Enter '" + BROWSE_COMMAND + "' to start thrifting.");
+            System.out.println("Enter '" + SELL_COMMAND + "' to start selling.\n");
+        }
+        quit();
+    }
+
     // EFFECTS: handle main menu commands - caseUI == 1
     private void handleMainMenuInput(String str) {
         if (str.length() > 0) {
@@ -134,25 +153,6 @@ public class ShoppingUI {
             System.out.println("This account is not on our system.\n");
         }
         printMainMenu();
-    }
-
-    // EFFECTS: print main menu
-    private void printMainMenu() {
-        File sys = new File(JSON_STORE);
-        if (!sys.exists() && user == null) {
-            System.out.println("You must sign up first to shop.");
-            System.out.println("Enter '" + REGISTER_COMMAND + "' to sign up as an user.\n");
-        } else if (user == null) {
-            System.out.println("You must log in or sign up first to shop.");
-            System.out.println("Enter '" + REGISTER_COMMAND + "' to sign up as a new user.");
-            System.out.println("Enter '" + LOGIN_COMMAND + "' if you've already "
-                    + "had an account with us.\n");
-        } else {
-            System.out.println("Welcome " + user.getName() + "! \nLet's explore OnlineThrift:");
-            System.out.println("Enter '" + BROWSE_COMMAND + "' to start thrifting.");
-            System.out.println("Enter '" + SELL_COMMAND + "' to start selling.\n");
-        }
-        quit();
     }
 
     // EFFECTS: print buy menu for user to browse for products

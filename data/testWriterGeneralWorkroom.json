@@ -1,0 +1,33 @@
+{"users": [
+    {
+        "password": "210",
+        "name": "andrew_01",
+        "cart": [],
+        "products": [{
+            "price": 90,
+            "type": "SHIRT",
+            "info": "Nike"
+        }]
+    },
+    {
+        "password": "cpsc",
+        "name": "vintage_thrifter",
+        "cart": [{
+            "price": 150,
+            "type": "ACCESSORIES",
+            "info": "Vivienne"
+        }],
+        "products": [
+            {
+                "price": 10,
+                "type": "SHIRT",
+                "info": "Black"
+            },
+            {
+                "price": 90,
+                "type": "PANTS",
+                "info": "Carhartt"
+            }
+        ]
+    }
+]}
