@@ -8,10 +8,16 @@ import org.junit.jupiter.api.Test;
 
 class PlatformTest {
     private Platform testPlatform;
+    private User u1;
+    private User u2;
+    private User u3;
 
     @BeforeEach
     void setUp() {
         testPlatform = new Platform();
+        u1 = new User("user1", "123");
+        u2 = new User("user2", "210");
+        u3 = new User("user3", "cpsc");
     }
 
     @Test
@@ -21,7 +27,6 @@ class PlatformTest {
 
     @Test
     void testSignUpUser() {
-        User u1 = new User("user1");
         testPlatform.signUpUser(u1);
         assertTrue(testPlatform.getUsersOnPlatform().contains(u1));
         assertEquals(1, testPlatform.numOfUsersOnPlatform());
@@ -29,9 +34,6 @@ class PlatformTest {
 
     @Test
     void testSignUpMultipleUser() {
-        User u1 = new User("user1");
-        User u2 = new User("user2");
-        User u3 = new User("user3");
         testPlatform.signUpUser(u1);
         testPlatform.signUpUser(u2);
         testPlatform.signUpUser(u3);
@@ -39,5 +41,17 @@ class PlatformTest {
         assertTrue(testPlatform.getUsersOnPlatform().contains(u1));
         assertTrue(testPlatform.getUsersOnPlatform().contains(u2));
         assertTrue(testPlatform.getUsersOnPlatform().contains(u3));
+    }
+
+    @Test
+    void testRemoveUser() {
+        testPlatform.signUpUser(u1);
+        testPlatform.removeUser(u1);
+        assertTrue(testPlatform.getUsersOnPlatform().isEmpty());
+        testPlatform.signUpUser(u1);
+        testPlatform.signUpUser(u2);
+        testPlatform.removeUser(u1);
+        assertEquals(1, testPlatform.numOfUsersOnPlatform());
+        assertTrue(testPlatform.getUsersOnPlatform().contains(u2));
     }
 }

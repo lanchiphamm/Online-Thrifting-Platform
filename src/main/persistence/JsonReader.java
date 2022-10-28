@@ -40,7 +40,7 @@ public class JsonReader {
         return contentBuilder.toString();
     }
 
-    // EFFECTS: parses workroom from JSON object and returns it
+    // EFFECTS: parses platform from JSON object and returns it
     private Platform parsePlatform(JSONObject jsonObject) {
         Platform platform = new Platform();
         addUsers(platform, jsonObject);
@@ -48,7 +48,7 @@ public class JsonReader {
     }
 
     // MODIFIES: platform
-    // EFFECTS: parses users from JSON object and adds them to workroom
+    // EFFECTS: parses users from JSON object and adds them to platform
     private void addUsers(Platform platform, JSONObject jsonObject) {
         JSONArray jsonArray = jsonObject.getJSONArray("users");
         for (Object user : jsonArray) {
@@ -58,16 +58,17 @@ public class JsonReader {
     }
 
     // MODIFIES: platform
-    // EFFECTS: parses user from JSON object and adds it to workroom
+    // EFFECTS: parses user from JSON object and adds it to platform
     private void addUser(Platform platform, JSONObject jsonObject) {
         String name = jsonObject.getString("name");
-        User user = new User(name);
+        String password = jsonObject.getString("password");
+        User user = new User(name, password);
         addProducts(user, jsonObject);
         addCarts(user, jsonObject);
         platform.signUpUser(user);
     }
 
-    // MODIFIES: platform
+    // MODIFIES: user
     // EFFECTS: parses products from JSON object and adds it to user
     private void addProducts(User user, JSONObject jsonObject) {
         JSONArray jsonArray = jsonObject.getJSONArray("products");
@@ -77,6 +78,8 @@ public class JsonReader {
         }
     }
 
+    // MODIFIES: user
+    // EFFECTS: parses product from JSON object and adds it to user's list of products
     private void addProduct(User user, JSONObject jsonObject) {
         ProductType type = ProductType.valueOf(jsonObject.getString("type"));
         int price = jsonObject.getInt("price");
@@ -85,16 +88,18 @@ public class JsonReader {
         user.addProduct(product);
     }
 
-    // MODIFIES: platform
-    // EFFECTS: parses cart from JSON object and adds it to user
+    // MODIFIES: user
+    // EFFECTS: parses carts from JSON object and adds it to user
     private void addCarts(User user, JSONObject jsonObject) {
-        JSONArray jsonArray = jsonObject.getJSONArray("products");
+        JSONArray jsonArray = jsonObject.getJSONArray("cart");
         for (Object product : jsonArray) {
             JSONObject nextProduct = (JSONObject) product;
             addCart(user, nextProduct);
         }
     }
 
+    // MODIFIES: user
+    // EFFECTS: parses cart from JSON object and adds it to user's cart
     private void addCart(User user, JSONObject jsonObject) {
         ProductType type = ProductType.valueOf(jsonObject.getString("type"));
         int price = jsonObject.getInt("price");

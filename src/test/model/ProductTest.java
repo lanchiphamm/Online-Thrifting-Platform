@@ -23,7 +23,7 @@ class ProductTest {
 
     @Test
     void testSetUser() {
-        User u = new User("kevin01");
+        User u = new User("kevin01", "cpsc210");
         testProduct.setUser(u);
         assertEquals(u, testProduct.getUser());
     }

@@ -47,9 +47,9 @@ public class JsonWriterTest extends JsonTest{
     void testWriterGeneralWorkroom() {
         try {
             Platform pf = new Platform();
-            User user1 = new User("andrew_01");
+            User user1 = new User("andrew_01", "210");
             user1.addProduct(new Product(SHIRT, 90, "Nike"));
-            User user2 = new User("vintage_thrifter");
+            User user2 = new User("vintage_thrifter", "cpsc");
             user2.addProduct(new Product(SHIRT, 10, "Black"));
             user2.addProduct(new Product(PANTS, 90, "Carhartt"));
             user2.addToCart(new Product(ACCESSORIES, 150, "Vivienne"));
@@ -66,9 +66,12 @@ public class JsonWriterTest extends JsonTest{
             assertEquals(2, userList.size());
             User u1 = userList.get(0);
             User u2 = userList.get(1);
-            checkUser(u1, "andrew_01", u1.getProducts(), u1.getCart());
-            checkUser(u2, "vintage_thrifter", u2.getProducts(), u2.getCart());
-
+            checkUser(u1, "andrew_01", "210", u1.getProducts(), u1.getCart());
+            checkUser(u2, "vintage_thrifter", "cpsc", u2.getProducts(), u2.getCart());
+            assertEquals(0, user1.getCart().size());
+            assertEquals(1, user1.getProducts().size());
+            assertEquals(1, user2.getCart().size());
+            assertEquals(2, user2.getProducts().size());
         } catch (IOException e) {
             fail("Exception should not have been thrown");
         }

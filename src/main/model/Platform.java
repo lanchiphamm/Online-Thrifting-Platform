@@ -24,6 +24,13 @@ public class Platform implements Writable {
         platformUsers.add(u);
     }
 
+    // REQUIRES: u in platformUsers
+    // MODIFIES: this
+    // EFFECTS: remove u from platformUsers
+    public void removeUser(User u) {
+        platformUsers.remove(u);
+    }
+
     // getter
     // USER STORY #2: view users on platform
     // EFFECTS: return the list platformUsers

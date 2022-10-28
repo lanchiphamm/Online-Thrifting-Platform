@@ -25,6 +25,7 @@ Main UI Structure:
 public class ShoppingUI {
 
     private static final String REGISTER_COMMAND = "sign up";
+    private static final String LOGIN_COMMAND = "log in";
     private static final String BROWSE_COMMAND = "browse";
     private static final String SELL_COMMAND = "sell";
     private static final String ADD_TO_CART_COMMAND = "buy";
@@ -56,10 +57,6 @@ public class ShoppingUI {
     public void runUI() {
         printMainMenu();
         String str;
-        File sys = new File(JSON_STORE);
-        if (sys.exists()) {
-            loadPlatform();
-        }
 
         while (runProgram) {
             if (input.hasNext()) {
@@ -83,6 +80,9 @@ public class ShoppingUI {
                 case REGISTER_COMMAND:
                     handleSignUp();
                     break;
+                case LOGIN_COMMAND:
+                    handleLogIn();
+                    break;
                 case BROWSE_COMMAND:
                     printBuyMenu();
                     break;
@@ -105,17 +105,48 @@ public class ShoppingUI {
                 + "Enter your username:");
 
         String name = input.nextLine();
-        user = new User(name);
+        System.out.println("Enter your password: ");
+        String password = input.nextLine();
+        user = new User(name, password);
         platform.signUpUser(user);
         System.out.println("Thank you for signing up with us!\n");
         printMainMenu();
     }
 
+    // MODIFIES: this
+    // EFFECTS: log in user to the platform
+    public void handleLogIn() {
+        System.out.println("Please fill in the following information.\n"
+                + "Enter your username:");
+        String name = input.nextLine();
+        System.out.println("Enter your password: ");
+        String password = input.nextLine();
+        boolean found = false;
+        loadPlatform();
+        for (User u : platform.getUsersOnPlatform()) {
+            if (u.getName().equals(name) && u.getPassword().equals(password)) {
+                user = u;
+                found = true;
+                System.out.println("All information loaded!\n");
+            }
+        }
+        if (!found) {
+            System.out.println("This account is not on our system.\n");
+        }
+        printMainMenu();
+    }
+
     // EFFECTS: print main menu
     private void printMainMenu() {
-        if (user == null) {
+        File sys = new File(JSON_STORE);
+        if (!sys.exists() && user == null) {
             System.out.println("You must sign up first to shop.");
             System.out.println("Enter '" + REGISTER_COMMAND + "' to sign up as an user.\n");
+        } else if (user == null) {
+            System.out.println("You must log in or sign up first to shop.");
+            System.out.println("Enter '" + REGISTER_COMMAND + "' to sign up as a new user.");
+            System.out.println("Enter '" + LOGIN_COMMAND + "' if you've already "
+                    + "had an account with us.\n");
         } else {
             System.out.println("Welcome " + user.getName() + "! \nLet's explore OnlineThrift:");
             System.out.println("Enter '" + BROWSE_COMMAND + "' to start thrifting.");
@@ -312,13 +343,31 @@ public class ShoppingUI {
                     printMainMenu();
                     break;
                 case QUIT_COMMAND:
-                    savePlatform();
+                    promptSave();
                     runProgram = false;
                     break;
                 default:
                     System.out.println("Sorry, I didn't understand that command :( Please try again.");
                     break;
             }
+        }
+    }
+
+    // EFFECTS:
+    private void promptSave() {
+        System.out.println("Do you want to save your account and all the activities in this"
+                + " shopping session to our system? (yes/no)");
+        String ans = input.nextLine();
+        if (ans.equals("yes")) {
+            savePlatform();
+            System.out.println("Account saved!");
+        } else if (ans.equals("no")) {
+            platform.removeUser(user);
+            System.out.println("We have removed your account and all activities from our system.");
+            savePlatform();
+        } else {
+            System.out.println("Sorry, I didn't understand that command");
+            promptSave();
         }
     }
 
@@ -343,7 +392,6 @@ public class ShoppingUI {
             jsonWriter.open();
             jsonWriter.write(platform);
             jsonWriter.close();
-            System.out.println("Saved information");
         } catch (FileNotFoundException e) {
             System.out.println("Unable to write to file: " + JSON_STORE);
         }
@@ -354,7 +402,6 @@ public class ShoppingUI {
     private void loadPlatform() {
         try {
             platform = jsonReader.read();
-            System.out.println("Loaded info from " + JSON_STORE);
         } catch (IOException e) {
             System.out.println("Unable to read from file: " + JSON_STORE);
         }

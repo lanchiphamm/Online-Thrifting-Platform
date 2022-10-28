@@ -29,10 +29,14 @@ each other as well
 - As a user, I want to be able to remove products I'm no longer selling from my profile
 - As a user, I want to be able to add products I want to buy to my cart
 - As a user, when I select the quit option from the application menu, I want to be reminded 
-of the option to save my cart or not, and all the products I've added to my profile are saved.
-- As a user, when I sign in to my account, I want to be given the option to load my previous cart, 
-and all products I've added to my profile from earlier session will be loaded automatically
+of the option to save my account or not
+- As a user, I can either start fresh by signing up as a new user or log in to the account I've saved 
+to the system from the last time and have all my information from that account loaded
 - As a user, I want to be able to view products specific to my liking (later)
 - As a user, I want to be able to view another person's profile and their products (later)
 - As a user, I want to be able to buy an item or get connected to the seller of this item (later)
 - add users to platform
+
+## References
+- persistence package: Based on the supplied Workroom example for CPSC 210
+  https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git 

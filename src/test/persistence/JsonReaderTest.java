@@ -41,8 +41,12 @@ public class JsonReaderTest extends JsonTest{
             assertEquals(2, userList.size());
             User user1 = userList.get(0);
             User user2 = userList.get(1);
-            checkUser(user1, "andrew_01", user1.getProducts(), user1.getCart());
-            checkUser(user2, "vintage_thrifter", user2.getProducts(), user2.getCart());
+            checkUser(user1, "andrew_01", "hahaha", user1.getProducts(), user1.getCart());
+            checkUser(user2, "vintage_thrifter", "2000hehe", user2.getProducts(), user2.getCart());
+            assertEquals(0, user1.getCart().size());
+            assertEquals(2, user1.getProducts().size());
+            assertEquals(2, user2.getCart().size());
+            assertEquals(3, user2.getProducts().size());
         } catch (IOException e) {
             fail("Couldn't read from file");
         }

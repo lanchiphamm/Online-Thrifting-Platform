@@ -44,8 +44,8 @@ public class ShoppingApp {
     // MODIFIES: this
     // EFFECTS: load some fixed users for the platform
     private void loadUsers() {
-        u1 = new User("andrew_01");
-        u2 = new User("vintage_thrifter");
+        u1 = new User("andrew_01", "12345678");
+        u2 = new User("vintage_thrifter", "hahahaha");
 
         platform.signUpUser(u1);
         platform.signUpUser(u2);

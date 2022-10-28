@@ -18,7 +18,7 @@ class UserTest {
 
     @BeforeEach
     void setUp() {
-        testUser = new User("abcdxyz");
+        testUser = new User("abcdxyz", "cpsc210");
         p1 = new Product(SHIRT, 50, "Nike black");
         p2 = new Product(SHOES, 90, "Nike AF1");
         p3 = new Product(OUTERWEAR, 150, "Carhartt Work");
@@ -27,6 +27,7 @@ class UserTest {
     @Test
     void testConstructor() {
         assertEquals("abcdxyz", testUser.getName());
+        assertEquals("cpsc210", testUser.getPassword());
         assertTrue(testUser.getProducts().isEmpty());
         assertTrue(testUser.getCart().isEmpty());
     }
@@ -121,4 +122,11 @@ class UserTest {
         assertFalse(testUser.getCart().contains(p2));
     }
 
+    @Test
+    void testEmptyCart() {
+        testUser.addToCart(p1);
+        testUser.addToCart(p2);
+        testUser.emptyCart();
+        assertEquals(0, testUser.getCart().size());
+    }
 }

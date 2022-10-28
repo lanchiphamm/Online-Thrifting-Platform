@@ -1,5 +1,6 @@
 {
   "users" : [    {
+    "password": "hahaha",
     "name": "andrew_01",
     "cart": [],
     "products": [
@@ -16,6 +17,7 @@
     ]
   },
     {
+      "password": "2000hehe",
       "name": "vintage_thrifter",
       "cart": [
         {

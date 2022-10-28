@@ -8,14 +8,16 @@ import persistence.Writable;
 // Represents a user on this platform with a username and a list of products they sell
 public class User implements Writable {
     private final String name;                  // Username of profile
+    private final String password;              // Password of profile
     private ArrayList<Product> products;        // User's list of products
     private ArrayList<Product> cart;            // keep track of purchases
 
     // REQUIRES: accountName is not an empty string
     // EFFECTS: name on account is set to accountName; an empty list of Products
     //          is initialised; an empty list of Purchased Products is initialised
-    public User(String accountName) {
+    public User(String accountName, String password) {
         name = accountName;
+        this.password = password;
         products = new ArrayList<>();
         cart = new ArrayList<>();
     }
@@ -23,6 +25,10 @@ public class User implements Writable {
     // getter
     public String getName() {
         return name;
+    }
+
+    public String getPassword() {
+        return password;
     }
 
     public ArrayList<Product> getProducts() {
@@ -55,7 +61,6 @@ public class User implements Writable {
         return false;
     }
 
-
     // USER STORY #4: add products the user wants to purchase to their cart
     // REQUIRES: p != null
     // MODIFIES: this
@@ -75,10 +80,18 @@ public class User implements Writable {
         return false;
     }
 
+    // REQUIRES: cart is not empty
+    // MODIFIES: this
+    // EFFECTS: empty out user's cart
+    public void emptyCart() {
+        cart.clear();
+    }
+
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
         json.put("name", name);
+        json.put("password", password);
         json.put("products", productsToJson());
         json.put("cart", cartToJson());
         return json;
