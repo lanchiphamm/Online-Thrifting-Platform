@@ -1,6 +1,7 @@
 package model;
 
 import static model.ProductType.SHIRT;
+import static model.ProductType.SHOES;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -55,5 +56,9 @@ class ProductTest {
     void testEquals() {
         assertFalse(testProduct.equals(new User("he", "hi")));
         assertTrue(testProduct.equals(testProduct));
+        assertFalse(testProduct.equals(new Product(SHOES, 100, "Nike")));
+        assertFalse(testProduct.equals(new Product(SHOES, 50, "Nike black")));
+        assertFalse(testProduct.equals(new Product(SHIRT, 60, "Nike black")));
+        assertFalse(testProduct.equals(new Product(SHIRT, 50, "black")));
     }
 }

@@ -147,5 +147,8 @@ class UserTest {
     void testEquals() {
         assertFalse(testUser.equals(new Platform()));
         assertTrue(testUser.equals(testUser));
+        assertFalse(testUser.equals(new User("abcdxyz", "c")));
+        assertFalse(testUser.equals(new User("a", "c")));
+        assertFalse(testUser.equals(new User("a", "cpsc210")));
     }
 }
