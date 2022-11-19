@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.Objects;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -135,5 +136,16 @@ class UserTest {
         Platform p =  new Platform();
         p.signUpUser(testUser);
         assertEquals(1, testUser.getUserKey());
+    }
+
+    @Test
+    void testHashCode() {
+        assertEquals(Objects.hash("abcdxyz", "cpsc210"), testUser.hashCode());
+    }
+
+    @Test
+    void testEquals() {
+        assertFalse(testUser.equals(new Platform()));
+        assertTrue(testUser.equals(testUser));
     }
 }
