@@ -2,7 +2,10 @@ package model;
 
 import static model.ProductType.SHIRT;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.Objects;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -41,5 +44,16 @@ class ProductTest {
         u.addProduct(testProduct);
         testProduct.setUser(u);
         assertEquals("1.1", testProduct.getProductKey());
+    }
+
+    @Test
+    void testHashCode() {
+        assertEquals(Objects.hash(SHIRT, 50, "Nike black"), testProduct.hashCode());
+    }
+
+    @Test
+    void testEquals() {
+        assertFalse(testProduct.equals(new User("he", "hi")));
+        assertTrue(testProduct.equals(testProduct));
     }
 }
