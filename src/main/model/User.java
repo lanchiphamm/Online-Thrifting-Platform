@@ -118,11 +118,6 @@ public class User implements Writable {
     }
 
     @Override
-    public String toString() {
-        return name;
-    }
-
-    @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
         json.put("name", name);

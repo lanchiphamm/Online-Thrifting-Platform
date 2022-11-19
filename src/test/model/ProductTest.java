@@ -32,4 +32,14 @@ class ProductTest {
     void testPrintProduct() {
         assertEquals("SHIRT: $50 - Nike black", testProduct.printProduct());
     }
+
+    @Test
+    void testGetProductKey() {
+        User u = new User("kevin01", "cpsc210");
+        Platform p = new Platform();
+        p.signUpUser(u);
+        u.addProduct(testProduct);
+        testProduct.setUser(u);
+        assertEquals("1.1", testProduct.getProductKey());
+    }
 }

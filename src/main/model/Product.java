@@ -48,7 +48,8 @@ public class Product implements Writable {
     public String getInfo() {
         return info;
     }
-
+    
+    // EFFECTS: get product key
     public String getProductKey() {
         return key;
     }

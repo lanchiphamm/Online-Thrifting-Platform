@@ -129,4 +129,11 @@ class UserTest {
         testUser.emptyCart();
         assertEquals(0, testUser.getCart().size());
     }
+
+    @Test
+    void testGetUserKey() {
+        Platform p =  new Platform();
+        p.signUpUser(testUser);
+        assertEquals(1, testUser.getUserKey());
+    }
 }
