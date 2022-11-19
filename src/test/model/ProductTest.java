@@ -56,8 +56,10 @@ class ProductTest {
     void testEquals() {
         assertFalse(testProduct.equals(new User("he", "hi")));
         assertTrue(testProduct.equals(testProduct));
+        assertTrue(testProduct.equals(new Product(SHIRT, 50, "Nike black")));
         assertFalse(testProduct.equals(new Product(SHOES, 100, "Nike")));
         assertFalse(testProduct.equals(new Product(SHOES, 50, "Nike black")));
+        assertFalse(testProduct.equals(new Product(SHOES, 60, "Nike black")));
         assertFalse(testProduct.equals(new Product(SHIRT, 60, "Nike black")));
         assertFalse(testProduct.equals(new Product(SHIRT, 50, "black")));
     }
