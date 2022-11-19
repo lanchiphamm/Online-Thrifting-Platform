@@ -10,22 +10,37 @@ import java.io.FileNotFoundException;
 import model.Platform;
 import model.Product;
 import model.User;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 
 public class ShoppingApp {
+    private static final String JSON_STORE = "./data/platform.json";
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
+    private boolean logged;
     private Platform platform;
+    private User user;
     private User u1;
     private User u2;
 
     public ShoppingApp() {
-        platform = new Platform();
+        this.platform = new Platform();
+        this.jsonWriter = new JsonWriter(JSON_STORE);
+        this.jsonReader = new JsonReader(JSON_STORE);
         loadUsers();
         loadUsersProducts();
+        loadGraphics();
+    }
+
+    public void loadGraphics() {
+
     }
 
     public static void main(String[] args) {
         ShoppingApp shoppingApp = new ShoppingApp();
         try {
             ShoppingUI shoppingUI = new ShoppingUI(shoppingApp.getPlatform());
+
             System.out.println("Welcome to OnlineThrift!\n");
 
             shoppingUI.runUI();

@@ -6,6 +6,7 @@ import java.io.PrintWriter;
 import model.Platform;
 import org.json.JSONObject;
 
+//
 public class JsonWriter {
     private static final int TAB = 4;
     private PrintWriter writer;

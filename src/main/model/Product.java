@@ -1,11 +1,13 @@
 package model;
 
+import java.util.Objects;
 import org.json.JSONObject;
 import persistence.Writable;
 
 // Represents a product and its owner, type, price, and any additional information
 public class Product implements Writable {
     private User user;              // seller of this product
+    private String key;            // Unique identifier for each product
     private ProductType type;       // type of clothing - ENUM
     private int price;              // price of product
     private String info;            // extra information inputted by user
@@ -27,6 +29,10 @@ public class Product implements Writable {
         this.user = u;
     }
 
+    public void setProductKey(String k) {
+        this.key = k;
+    }
+
     public User getUser() {
         return user;
     }
@@ -41,6 +47,33 @@ public class Product implements Writable {
 
     public String getInfo() {
         return info;
+    }
+
+    public String getProductKey() {
+        return key;
+    }
+
+    // EFFECTS: print description of Product p
+    public String printProduct() {
+        return type + ": $" + price + " - " + info;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Product)) {
+            return false;
+        }
+        Product product = (Product) o;
+        return price == product.price && type == product.type && Objects.equals(info,
+            product.info);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(type, price, info);
     }
 
     @Override

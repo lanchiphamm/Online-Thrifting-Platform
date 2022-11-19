@@ -37,6 +37,25 @@ to the system from the last time and have all my information from that account l
 - As a user, I want to be able to buy an item or get connected to the seller of this item (later)
 - add users to platform
 
+## Instructions for Grader
+To access the main GUI where you can generate the required events, you must login/register first.
+Navigate to the User Profile tab, the required events are related to class *User* and class *Product*.
+- 1st Event: Add multiple products (*Product*) to user profile (*User*)
+    - On the **Add your Products** panel, specify the type, price, and description for you product
+    - Click Add Product and the product you've just specified is added and display on your profile
+- 2nd Event: Remove multiple products (*Product*) from user profile (*User*)
+    - On the **Your Profile** panel, choose the product you want to remove from your profile by
+  clicking on the list
+    - Click Remove and the product you've just chosen is removed from your profile
+**NOTE**: you can see these changes reflected by the number next to "Products: "
+- You can locate the visual component by going to **User Profile tab**, on the **Add your Products**
+panel, when you choose different clothing type (SHIRT, SHOES, etc.), different pictures are displayed.
+- To save the state of the application to file, navigate to **Settings** tab, choose "Yes" then click
+*Log out*. If you don't want to save the entire state, choose "No" and Logout.
+- Loading the state of the application from file is performed when you log in with the account you 
+have chosen to save before (when you Logout and chose "Yes"). Login into this account will reload all
+the items you have added to your cart before and items on your profile.
+
 ## References
 - persistence package: Based on the supplied Workroom example for CPSC 210
   https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git 

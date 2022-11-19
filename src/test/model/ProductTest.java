@@ -27,4 +27,9 @@ class ProductTest {
         testProduct.setUser(u);
         assertEquals(u, testProduct.getUser());
     }
+
+    @Test
+    void testPrintProduct() {
+        assertEquals("SHIRT: $50 - Nike black", testProduct.printProduct());
+    }
 }

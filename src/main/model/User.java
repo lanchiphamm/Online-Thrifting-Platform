@@ -1,12 +1,14 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Objects;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import persistence.Writable;
 
 // Represents a user on this platform with a username and a list of products they sell
 public class User implements Writable {
+    private Integer key;                        // Unique identifier for each profile
     private final String name;                  // Username of profile
     private final String password;              // Password of profile
     private ArrayList<Product> products;        // User's list of products
@@ -23,6 +25,10 @@ public class User implements Writable {
     }
 
     // getter
+    public int getUserKey() {
+        return key;
+    }
+
     public String getName() {
         return name;
     }
@@ -39,6 +45,10 @@ public class User implements Writable {
         return cart;
     }
 
+    public void setUserKey(int k) {
+        this.key = k;
+    }
+
     // USER STORY #1: add products the user is reselling to profile
     // REQUIRES: p != null
     // MODIFIES: this and Product
@@ -46,6 +56,9 @@ public class User implements Writable {
     public void addProduct(Product p) {
         products.add(p);
         p.setUser(this);
+        String k =  "" + this.key + ".";
+        k += products.indexOf(p) + 1;
+        p.setProductKey(k);
     }
 
     // USER STORY #3: remove product from profile
@@ -85,6 +98,28 @@ public class User implements Writable {
     // EFFECTS: empty out user's cart
     public void emptyCart() {
         cart.clear();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof User)) {
+            return false;
+        }
+        User user = (User) o;
+        return name.equals(user.name) && password.equals(user.password);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, password);
+    }
+
+    @Override
+    public String toString() {
+        return name;
     }
 
     @Override

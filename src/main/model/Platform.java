@@ -22,6 +22,7 @@ public class Platform implements Writable {
     // EFFECTS: add u to list of platformUsers
     public void signUpUser(User u) {
         platformUsers.add(u);
+        u.setUserKey(platformUsers.indexOf(u) + 1);
     }
 
     // REQUIRES: u in platformUsers

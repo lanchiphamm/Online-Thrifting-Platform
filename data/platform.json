@@ -40,12 +40,38 @@
     },
     {
         "password": "18012002",
-        "name": "chichi",
-        "cart": [{
-            "price": 30,
-            "type": "ACCESSORIES",
-            "info": "Carhartt Beanie"
-        }],
-        "products": []
+        "name": "chi",
+        "cart": [
+            {
+                "price": 60,
+                "type": "OUTERWEAR",
+                "info": "Black hoodie"
+            },
+            {
+                "price": 1100,
+                "type": "SHOES",
+                "info": "testttt"
+            },
+            {
+                "price": 100,
+                "type": "PANTS",
+                "info": "aklsjlasvd"
+            },
+            {
+                "price": 70,
+                "type": "PANTS",
+                "info": "ZARA Work Jeans"
+            },
+            {
+                "price": 100,
+                "type": "SHOES",
+                "info": "Nike AF1"
+            }
+        ],
+        "products": [{
+            "price": 90,
+            "type": "PANTS",
+            "info": "sfafsa"
+        }]
     }
 ]}
