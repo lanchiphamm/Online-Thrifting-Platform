@@ -56,6 +56,33 @@ panel, when you choose different clothing type (SHIRT, SHOES, etc.), different p
 have chosen to save before (when you Logout and chose "Yes"). Login into this account will reload all
 the items you have added to your cart before and items on your profile.
 
+## Phase 4: Task 2
+- I'd clear the log every time a new user signs in, hence the "Event log cleared". Below is the 
+event log of adding 4 products to your selling profile, then removing 2.
+
+Thu Dec 01 15:04:59 PST 2022
+Event log cleared.
+
+Thu Dec 01 15:05:13 PST 2022
+New SHIRT added to profile
+
+Thu Dec 01 15:05:26 PST 2022
+New PANTS added to profile
+
+Thu Dec 01 15:05:36 PST 2022
+New ACCESSORIES added to profile
+
+Thu Dec 01 15:06:11 PST 2022
+New OUTERWEAR added to profile
+
+Thu Dec 01 15:06:18 PST 2022
+Product (PANTS) removed from profile
+
+Thu Dec 01 15:06:20 PST 2022
+Product (ACCESSORIES) removed from profile
+
 ## References
 - persistence package: Based on the supplied Workroom example for CPSC 210
   https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git 
+- Event and EventLog class: Based on the Alarm System application from CPSC 210
+  https://github.students.cs.ubc.ca/CPSC210/AlarmSystem 

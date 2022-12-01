@@ -10,6 +10,8 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
+import model.Event;
+import model.EventLog;
 import model.User;
 
 public class SettingsGUI {
@@ -75,15 +77,13 @@ public class SettingsGUI {
         logOut = new JButton(new AbstractAction("Log out") {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (save) {
-                    System.out.println("Account saved");
-                } else {
+                if (!save) {
                     User currentUser = loginGUI.getUser();
                     loginGUI.getPlatform().removeUser(currentUser);
-                    System.out.println("Account not saved");
                 }
                 loginGUI.setUser(null);
                 loginGUI.savePlatform();
+                LoginGUI.printLog(EventLog.getInstance());
                 hp.hideFrame();
                 new LoginGUI();
             }

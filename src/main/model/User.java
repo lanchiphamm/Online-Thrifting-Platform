@@ -59,6 +59,7 @@ public class User implements Writable {
         String k =  "" + this.key + ".";
         k += products.indexOf(p) + 1;
         p.setProductKey(k);
+        EventLog.getInstance().logEvent(new Event("New " + p.getType() + " added to profile"));
     }
 
     // USER STORY #3: remove product from profile
@@ -69,6 +70,8 @@ public class User implements Writable {
     public boolean removeItem(Product p) {
         if (products.contains(p)) {
             products.remove(p);
+            EventLog.getInstance().logEvent(new Event("Product ("
+                    + p.getType() + ") removed from profile"));
             return true;
         }
         return false;
@@ -80,6 +83,7 @@ public class User implements Writable {
     // EFFECTS: p is added to cart
     public void addToCart(Product p) {
         cart.add(p);
+//        EventLog.getInstance().logEvent(new Event("New product added to cart"));
     }
 
     // REQUIRES: p != null
@@ -88,6 +92,7 @@ public class User implements Writable {
     public boolean removeFromCart(Product p) {
         if (cart.contains(p)) {
             cart.remove(p);
+//            EventLog.getInstance().logEvent(new Event("Product removed from cart"));
             return true;
         }
         return false;

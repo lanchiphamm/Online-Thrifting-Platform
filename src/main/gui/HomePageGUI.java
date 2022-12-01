@@ -7,6 +7,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultListModel;
@@ -18,6 +20,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.JTabbedPane;
+import model.EventLog;
 import model.Platform;
 import model.Product;
 import model.User;
@@ -53,8 +56,15 @@ public class HomePageGUI implements ActionListener {
         this.platform = loginGUI.getPlatform();
         frame = new JFrame("OnlineThrift");
         frame.setBounds(300, 200, WIDTH, HEIGHT);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
+        frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        frame.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                LoginGUI.printLog(EventLog.getInstance());
+                frame.dispose();
+                System.exit(0);
+            }
+        });
         JTabbedPane tab = new JTabbedPane();
         loadBrowserTab();
         tab.addTab("Browser", browserTab);
@@ -126,18 +136,15 @@ public class HomePageGUI implements ActionListener {
             User user = listUser.get(i - 1);
             ArrayList<Product> listProducts = user.getProducts();
             if (listProducts.size() > 0) {
-                System.out.println(user.getName());
                 for (int j = 1; j <= listProducts.size(); j++) {
                     Product p = listProducts.get(j - 1);
                     String item = i + "." + j + " ";
                     if (user == this.user) {
-                        System.out.println("how did it get here");
                         item += "User: " + user.getName() + " - Yourself";
                     } else {
                         item += "User: " + user.getName();
                     }
                     item += " || " + p.printProduct();
-                    System.out.println(item);
                     usersModel.addElement(item);
                 }
             }

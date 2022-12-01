@@ -23,6 +23,7 @@ public class Platform implements Writable {
     public void signUpUser(User u) {
         platformUsers.add(u);
         u.setUserKey(platformUsers.indexOf(u) + 1);
+//        EventLog.getInstance().logEvent(new Event("New user added to platform"));
     }
 
     // REQUIRES: u in platformUsers
@@ -30,6 +31,7 @@ public class Platform implements Writable {
     // EFFECTS: remove u from platformUsers
     public void removeUser(User u) {
         platformUsers.remove(u);
+//        EventLog.getInstance().logEvent(new Event("User removed from platform"));
     }
 
     // getter

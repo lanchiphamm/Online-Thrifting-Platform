@@ -39,39 +39,20 @@
         ]
     },
     {
-        "password": "18012002",
+        "password": "1801",
         "name": "chi",
-        "cart": [
+        "cart": [],
+        "products": [
             {
-                "price": 60,
+                "price": 20,
+                "type": "SHIRT",
+                "info": "White"
+            },
+            {
+                "price": 200,
                 "type": "OUTERWEAR",
-                "info": "Black hoodie"
-            },
-            {
-                "price": 1100,
-                "type": "SHOES",
-                "info": "testttt"
-            },
-            {
-                "price": 100,
-                "type": "PANTS",
-                "info": "aklsjlasvd"
-            },
-            {
-                "price": 70,
-                "type": "PANTS",
-                "info": "ZARA Work Jeans"
-            },
-            {
-                "price": 100,
-                "type": "SHOES",
-                "info": "Nike AF1"
+                "info": "Polo"
             }
-        ],
-        "products": [{
-            "price": 90,
-            "type": "PANTS",
-            "info": "sfafsa"
-        }]
+        ]
     }
 ]}

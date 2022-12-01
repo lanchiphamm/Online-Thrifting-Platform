@@ -8,6 +8,9 @@ import static model.ProductType.SHOES;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -17,9 +20,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import model.EventLog;
 import model.Platform;
 import model.Product;
 import model.User;
+import model.Event;
 import persistence.JsonReader;
 import persistence.JsonWriter;
 
@@ -54,6 +59,7 @@ public class LoginGUI implements ActionListener {
             loadPlatform();
         }
 
+        EventLog.getInstance().clear();
         loadInputFields();
         buttonDisplay();
 
@@ -190,6 +196,12 @@ public class LoginGUI implements ActionListener {
         u2.addProduct(p2);
         u2.addProduct(p5);
         savePlatform();
+    }
+
+    public static void printLog(EventLog el) {
+        for (Event next : el) {
+            System.out.println(next.toString() + "\n");
+        }
     }
 }
 

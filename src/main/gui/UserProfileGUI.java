@@ -126,7 +126,6 @@ public class UserProfileGUI implements ActionListener {
                 String selectedItem = (String) userProductsList.getSelectedValue();
                 if (e.getClickCount() == 1 && !user.getProducts().isEmpty() && selectedItem != null) {
                     Product p = getProductFromString(selectedItem);
-                    System.out.println("hi" + user.getUserKey() + user.getProducts().indexOf(p));
                     hp.getUsersModel().removeElement(user.getUserKey() + "."
                             +  (user.getProducts().indexOf(p) + 1) + " User: " + user.getName()
                             + " - Yourself" + " || " + p.printProduct());
@@ -272,7 +271,6 @@ public class UserProfileGUI implements ActionListener {
             Image image = imageIcon.getImage();
             Image newImg = image.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
             pictureType.setIcon(new ImageIcon(newImg));
-            System.out.println("./data/" + e.getActionCommand() + ".png");
             typeChosen = e.getActionCommand();
         }
     }
