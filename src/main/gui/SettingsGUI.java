@@ -24,6 +24,7 @@ public class SettingsGUI {
     JRadioButton no;
     Boolean save;
     JButton logOut;
+
     LoginGUI loginGUI;
     HomePageGUI hp;
 
