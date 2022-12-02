@@ -24,8 +24,6 @@ import model.EventLog;
 import model.Platform;
 import model.Product;
 import model.User;
-import persistence.JsonReader;
-import persistence.JsonWriter;
 
 /***
  * Represents a HomePage tab where users can browse and buy products
@@ -34,9 +32,6 @@ import persistence.JsonWriter;
 public class HomePageGUI implements ActionListener {
     public static final int WIDTH = 800;
     public static final int HEIGHT = 500;
-    private static final String JSON_STORE = "./data/platform.json";
-    private JsonWriter jsonWriter = new JsonWriter(JSON_STORE);
-    private JsonReader jsonReader = new JsonReader(JSON_STORE);
     private Platform platform;
     private User user;
 

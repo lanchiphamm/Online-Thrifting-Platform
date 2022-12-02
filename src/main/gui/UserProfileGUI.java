@@ -25,7 +25,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-import model.Platform;
 import model.Product;
 import model.ProductType;
 import model.User;
@@ -38,7 +37,7 @@ import model.User;
 public class UserProfileGUI implements ActionListener {
     HomePageGUI hp;
     User user;
-    Platform platform;
+
     JSplitPane userProfileTab;
     JPanel addProduct;
     JLabel pictureType;
@@ -66,7 +65,6 @@ public class UserProfileGUI implements ActionListener {
     public UserProfileGUI(LoginGUI loginGUI, HomePageGUI hp) {
         this.hp = hp;
         this.user = loginGUI.getUser();
-        this.platform = loginGUI.getPlatform();
 
         loadUserInfoPanel();
 

@@ -81,6 +81,18 @@ Product (PANTS) removed from profile
 Thu Dec 01 15:06:20 PST 2022
 Product (ACCESSORIES) removed from profile
 
+## Phase 4: Task 3
+- Improve cohesion by separating User class into 2 classes - User and Cart. User class will handle
+all user profile information (name, password, products list), while Cart class will handle user's\
+shopping cart.
+- Improve coupling: Right now (from looking at the UML and further code inspection) LoginGUI, 
+HomePageGUI, UserProfileGUI, SettingsGUI all either have a Platform field and a User field or have 
+access to the same 1 Platform and 1 current User that is common to all these 4 classes. One way 
+to make it clearer that all these 4 classes are accessing same Platform and User is to pass the 
+LoginGUI class to the HomePageGUI and make Platform/User local fields. The same for the 2 other classes.
+An even better way could be implementing the Singleton Pattern, since everytime a user login, we only
+want/need access to one & only 1 instance of the loaded platform and that user
+
 ## References
 - persistence package: Based on the supplied Workroom example for CPSC 210
   https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git 
