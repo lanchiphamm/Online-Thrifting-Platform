@@ -27,6 +27,10 @@ import model.User;
 import persistence.JsonReader;
 import persistence.JsonWriter;
 
+/***
+ * Represents a HomePage tab where users can browse and buy products
+ * Also constructs the main frame with two more tabs: User Profile & Settings
+ */
 public class HomePageGUI implements ActionListener {
     public static final int WIDTH = 800;
     public static final int HEIGHT = 500;

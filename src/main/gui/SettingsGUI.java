@@ -10,10 +10,14 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
-import model.Event;
 import model.EventLog;
 import model.User;
 
+/***
+ * Represents the Settings tab, one of the 3 tabs of the main frame.
+ * Allow users to log out of the platform with a choice of saving all
+ * their previous activities or not.
+ */
 public class SettingsGUI {
     JPanel settings;
     JRadioButton yes;

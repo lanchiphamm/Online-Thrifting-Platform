@@ -30,6 +30,11 @@ import model.Product;
 import model.ProductType;
 import model.User;
 
+/***
+ * Represents the User Profile tab, one of the 3 tabs of the main frame.
+ * Allow users to view their own profile, the list of product they are selling,
+ * and users can add more products they want to sell on this tab
+ */
 public class UserProfileGUI implements ActionListener {
     HomePageGUI hp;
     User user;

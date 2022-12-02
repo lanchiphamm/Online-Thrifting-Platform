@@ -5,7 +5,9 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import persistence.Writable;
 
-// Represents a platform with Users on it
+/***
+ * Represents a platform with Users on it
+ */
 public class Platform implements Writable {
     private ArrayList<User> platformUsers;
 

@@ -4,10 +4,12 @@ import java.util.Objects;
 import org.json.JSONObject;
 import persistence.Writable;
 
-// Represents a product and its owner, type, price, and any additional information
+/***
+ * Represents a product and its owner, type, price, and any additional information
+ */
 public class Product implements Writable {
     private User user;              // seller of this product
-    private String key;            // Unique identifier for each product
+    private String key;             // Unique identifier for each product
     private ProductType type;       // type of clothing - ENUM
     private int price;              // price of product
     private String info;            // extra information inputted by user

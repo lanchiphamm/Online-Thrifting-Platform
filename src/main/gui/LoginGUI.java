@@ -8,9 +8,6 @@ import static model.ProductType.SHOES;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -28,6 +25,10 @@ import model.Event;
 import persistence.JsonReader;
 import persistence.JsonWriter;
 
+/***
+ * Represents a Login page for user to login/register their
+ * account to the platform
+ */
 public class LoginGUI implements ActionListener {
     private static final String JSON_STORE = "./data/platform.json";
     private JsonWriter jsonWriter = new JsonWriter(JSON_STORE);

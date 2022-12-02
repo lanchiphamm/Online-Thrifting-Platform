@@ -6,7 +6,10 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import persistence.Writable;
 
-// Represents a user on this platform with a username and a list of products they sell
+/***
+ * Represents a user on this platform with a username, password,
+ * a list of products they sell, and their shopping cart
+ */
 public class User implements Writable {
     private Integer key;                        // Unique identifier for each profile
     private final String name;                  // Username of profile
