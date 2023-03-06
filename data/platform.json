@@ -37,22 +37,5 @@
                 "info": "ZARA Work Jeans"
             }
         ]
-    },
-    {
-        "password": "1801",
-        "name": "chi",
-        "cart": [],
-        "products": [
-            {
-                "price": 20,
-                "type": "SHIRT",
-                "info": "White"
-            },
-            {
-                "price": 200,
-                "type": "OUTERWEAR",
-                "info": "Polo"
-            }
-        ]
     }
 ]}
